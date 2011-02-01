@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <grant
+      permission="quotationtool.bibliography.AddEntry"
+      role="quotationtool.Member"
+      />
+
+  <grant
+      permission="quotationtool.bibliography.AddEntry"
+      role="quotationtool.Editor"
+      />
+
+  <grant
+      permission="quotationtool.bibliography.EditEntry"
+      role="quotationtool.Editor"
+      />
+
+  <grant
+      permission="quotationtool.bibliography.EditEntry"
+      role="quotationtool.Creator"
+      />
+
+</configure>

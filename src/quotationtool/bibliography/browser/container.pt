@@ -1,0 +1,39 @@
+<div class="container_listing bibliography_container">
+  <table>
+    <thead>
+      <td>
+	<span
+	    i18n:translate="">
+	  Title
+	</span>
+      </td>
+      <td>
+	<span
+	    i18n:translate="">
+	  flags
+	</span>
+      </td>
+    </thead>
+    <tal:block repeat="entry view/getEntries">
+      <tr class="odd" tal:condition="repeat/entry/odd">
+	<metal:macro define-macro="entry-row">
+	  <td>
+	    <a class="entry_title" 
+		tal:attributes="href entry/@@bibliography"
+		tal:content="structure entry/@@bibliography">
+	      Kant: Kritik der Urteilskraft. Berlin 1790.
+	    </a>
+	  </td>
+	  <td class="entry_flags"
+	      tal:content="structure entry/@@flags">
+	    <span class="schema_error">S</span>, 
+	    <span class="has_comment">C</span>
+	  </td>
+	</metal:macro>
+      </tr>
+      <tr class="even" tal:condition="repeat/entry/even">
+	<metal:macro use-macro="template/macros/entry-row"/>
+      </tr>
+    </tal:block>
+  </table>
+</div>

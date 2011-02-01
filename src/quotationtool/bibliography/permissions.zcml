@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="quotationtool">
+
+  <permission
+      id="quotationtool.bibliography.AddEntry"
+      title="[add-entry-permission-title] Add an entry to the bibliography"
+      />
+
+  <permission
+      id="quotationtool.bibliography.EditEntry"
+      title="[edit-entry-permission-title] Edit a bibliographic entry"
+      />
+      
+</configure>

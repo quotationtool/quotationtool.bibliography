@@ -1,0 +1,60 @@
+<configure
+    xmlns='http://namespaces.zope.org/browser'
+    xmlns:zope='http://namespaces.zope.org/zope'
+    xmlns:z3c='http://namespaces.zope.org/z3c'
+    i18n_domain='quotationtool'>
+
+  <include file="dependencies.zcml"/>
+
+  <zope:view
+      name="label"
+      type="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      for="..interfaces.IBibliography"
+      factory=".bibliography.LabelView"
+      permission="zope.View"
+      />
+
+  <z3c:pagelet
+      name="index.html"
+      for="..interfaces.IBibliography"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="zope.View"
+      class=".bibliography.Container"
+      />
+  <z3c:template
+      for=".bibliography.Container"
+      template="container.pt"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <defaultView
+      for="..interfaces.IBibliography"
+      name="index.html"
+      />      
+
+  <zope:view
+      name="bibliography"
+      type="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      for="..interfaces.IEntry"
+      factory=".entry.DefaultView"
+      permission="zope.View"
+      />
+
+  <viewletManager
+      name="bibliographyflags"
+      class=".flags.FlagsManager"
+      provides=".flags.IFlagsManager"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="zope.View"
+      />
+
+  <zope:view
+      name="flags"
+      type="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      for="..interfaces.IEntry"
+      factory=".flags.FlagsView"
+      permission="zope.View"
+      />
+
+  <include file="nav.zcml"/>
+  
+</configure>
