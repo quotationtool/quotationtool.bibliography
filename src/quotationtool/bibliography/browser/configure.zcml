@@ -39,22 +39,6 @@
       permission="zope.View"
       />
 
-  <viewletManager
-      name="bibliographyflags"
-      class=".flags.FlagsManager"
-      provides=".flags.IFlagsManager"
-      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
-      permission="zope.View"
-      />
-
-  <zope:view
-      name="flags"
-      type="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
-      for="..interfaces.IEntry"
-      factory=".flags.FlagsView"
-      permission="zope.View"
-      />
-
   <include file="nav.zcml"/>
   
 </configure>
