@@ -6,7 +6,7 @@ import zope.publisher.browser
 import z3c.form
 from zope.component.testing import setUp, tearDown, PlacelessSetup
 from zope.configuration.xmlconfig import XMLConfig
-from zope.app.security.principalregistry import UnauthenticatedPrincipal
+from zope.security.testing import Principal
 
 from quotationtool.skin.interfaces import IQuotationtoolBrowserLayer 
 
@@ -16,7 +16,7 @@ import quotationtool.bibliography.browser
 
 _flags = doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS
 
-anonymous = UnauthenticatedPrincipal('anon', '', '')
+anonymous = Principal('anonymous')
 
 
 def setUpZCML(test):
@@ -41,6 +41,8 @@ def generateContent(test):
     from quotationtool.bibliography.bibliography import Bibliography
     biblio = Bibliography()
     biblio['KdU'] = MyEntry(u'Kant', u'KdU', 1790)
+    from zope.location.interfaces import IRoot
+    zope.interface.directlyProvides(biblio, IRoot)
     return biblio
 
 
@@ -77,11 +79,25 @@ class ContainerTests(PlacelessSetup, unittest.TestCase):
         from quotationtool.bibliography.browser.bibliography import Container
         view = Container(biblio, request)
         self.assertTrue(isinstance(view(), unicode))
+        
 
+class EntryTests(PlacelessSetup, unittest.TestCase):
 
+    def setUp(self):
+        super(EntryTests, self).setUp()
+        setUpZCML(self)
 
+    def test_AddEntryPagelet(self):
+        biblio = generateContent(self)
+        request = TestRequest()
+        request.setPrincipal(anonymous)
+        from quotationtool.bibliography.browser.entry import AddEntry
+        view = AddEntry(biblio, request)
+        self.assertTrue(isinstance(view(), unicode))
+        
 
 def test_suite():
     return unittest.TestSuite((
             unittest.makeSuite(ContainerTests),
+            unittest.makeSuite(EntryTests),
             ))

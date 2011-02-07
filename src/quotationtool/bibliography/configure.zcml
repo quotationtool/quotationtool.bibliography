@@ -5,7 +5,9 @@
   <include file="dependencies.zcml"/>
   
   <include file="permissions.zcml"/>
-  <include file="roles.zcml"/>
+  
+  <!-- Include roles in your app!
+  <include file="roles.zcml"/-->
 
   <!-- bibliography -->
   

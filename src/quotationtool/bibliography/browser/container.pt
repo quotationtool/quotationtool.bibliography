@@ -19,7 +19,7 @@
 	<metal:macro define-macro="entry-row">
 	  <td>
 	    <a class="entry_title" 
-		tal:attributes="href entry/@@bibliography"
+		tal:attributes="href entry/@@absolute_url"
 		tal:content="structure entry/@@bibliography">
 	      Kant: Kritik der Urteilskraft. Berlin 1790.
 	    </a>

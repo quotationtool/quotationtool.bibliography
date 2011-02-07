@@ -20,7 +20,7 @@ We want to choose names for an entry. So we need an entry type.
     >>> class MyEntry(object):
     ...     zope.interface.implements(IMyEntry)
     ...     __name__ = __parent__ = None
-    ...     def __init__(self, author = u'', title = u'', year = u''):
+    ...     def __init__(self, author = [], title = u'', year = u''):
     ...         self.author = author
     ...         self.title = title
     ...         self.year = year
@@ -44,6 +44,10 @@ provide an adapter for our MyEntry class:
     ...     def getter(self, attr):
     ...         return getattr(self.context, attr, u"")
     ...     def __getattr__(self, name):
+    ...	    	if name == 'author':
+    ...             au = getattr(self.context, 'author', None)
+    ...             if not au: return None
+    ...		    return au[0]
     ...         return getattr(self.context, name)
     >>> zope.component.provideAdapter(MyCatalogAdapter)
     >>> names.chooseName(None, mybook)

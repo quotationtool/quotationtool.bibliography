@@ -59,6 +59,7 @@ setup(
         'zope.security',
         'zope.securitypolicy',
         'zope.app.schema',
+        'zope.viewlet',
 
         'quotationtool.site',
         'quotationtool.security',
@@ -78,7 +79,6 @@ setup(
         'z3c.menu.ready2go',
 
         'zope.app.pagetemplate',
-        'zope.viewlet',
         'zope.app.component',
         ],
     extras_require = dict(
@@ -86,7 +86,6 @@ setup(
             'zope.testing',
             'zope.configuration',
             'zope.site',
-            'zope.app.security',
             ],
         ),
     )

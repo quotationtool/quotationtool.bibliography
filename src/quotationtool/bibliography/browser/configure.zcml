@@ -39,6 +39,27 @@
       permission="zope.View"
       />
 
+  <z3c:pagelet
+      name="addEntry.html"
+      for="..interfaces.IBibliography"
+      permission="quotationtool.bibliography.AddEntry"
+      class=".entry.AddEntry"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <z3c:template
+      for=".entry.AddEntry"
+      template="add_entry.pt"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+
+  <viewletManager
+      name="add-bibliographic-entry"
+      class=".entry.AddEntryManager"
+      provides="..interfaces.IAddEntryManager"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="zope.View"
+      />
+
   <include file="nav.zcml"/>
   
 </configure>

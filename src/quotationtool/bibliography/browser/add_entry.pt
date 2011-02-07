@@ -1,0 +1,7 @@
+<div id="add-bibliographic-entry">
+  
+  <h1>Add bibliographic entry</h1>
+
+  <div class="options" tal:content="structure provider:add-bibliographic-entry"/>
+
+</div>

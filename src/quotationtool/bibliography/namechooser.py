@@ -30,7 +30,7 @@ class EntryNameChooser(NameChooser):
         obj = interfaces.IBibliographyCatalog(obj)
         name = u""
         if obj.author:
-            name += removeNonAscii(obj.author[0].split(',')[0])
+            name += removeNonAscii(obj.author.split(',')[0])
         else:
             if obj.title:
                 name += removeNonAscii(obj.title)

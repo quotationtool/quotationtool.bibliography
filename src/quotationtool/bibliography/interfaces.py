@@ -7,6 +7,7 @@ from zope.container.interfaces import IContainer, IContained
 from zope.container.constraints import contains, containers
 from zope.interface.common.interfaces import IException
 from zope.i18nmessageid import MessageFactory
+from zope.viewlet.interfaces import IViewletManager
 
 
 _ = MessageFactory('quotationtool')
@@ -191,3 +192,8 @@ class IBibliographyCatalog(zope.interface.Interface):
         required = False,
         default = u'',
         )
+
+
+class IAddEntryManager(IViewletManager):
+    """ A viewlet manager that lets the user choose an entry type he
+    wants to add.""" 
