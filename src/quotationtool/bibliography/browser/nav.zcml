@@ -53,7 +53,7 @@
 
   <z3c:siteMenuItem
       for="*"
-      title="[mainnav-bibliography] Add Entry"
+      title="[subnav-bibliography-add] Add Entry"
       name="add-bibliographicentry"
       permission="zope.View"
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
@@ -62,6 +62,34 @@
       weight="100"
       />
 
-
+  <z3c:siteMenuItem
+      for="*"
+      title="[subnav-bibliography-search] Search"
+      name="search-bibliography"
+      class=".nav.SearchSubNavItem"
+      permission="zope.View"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      manager=".nav.IBibliographySubNav"
+      viewName="bibliography/@@search.html"
+      weight="200"
+      />
+  <adapter
+      for="..interfaces.IBibliography
+           zope.publisher.interfaces.browser.IBrowserRequest
+           .search.SearchForm
+           z3c.menu.ready2go.interfaces.IMenuManager
+           .nav.ISearchSubNavItem"
+      provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
+      factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
+      />
+  <adapter
+      for="..interfaces.IBibliography
+           zope.publisher.interfaces.browser.IBrowserRequest
+           .search.SearchResultPage
+           z3c.menu.ready2go.interfaces.IMenuManager
+           .nav.ISearchSubNavItem"
+      provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
+      factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
+      />
 
 </configure>

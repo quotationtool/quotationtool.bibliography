@@ -107,9 +107,9 @@ class IBibliographyCatalog(zope.interface.Interface):
     bibliography."""
 
     any = zope.schema.TextLine(
-        title = _('ibibliographycatalog-any-title',
+        title = _('catalog-any-title',
                   u"Any field / free"),
-        description = _('ibibliographycatalog-any-desc',
+        description = _('catalog-any-desc',
                         u"Free text."),
         required = False,
         default = u'',

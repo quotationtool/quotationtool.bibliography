@@ -14,6 +14,11 @@ from quotationtool.site.interfaces import INewQuotationtoolSiteEvent
 def createBibliographyCatalogIndices(cat, interface = interfaces.IBibliographyCatalog):
     """Add indexes to the catalog passed in."""
 
+    # we do not create the any index here!
+    #cat['any'] = TextIndex(
+    #    interface = interface,
+    #    field_name = 'any')
+    
     cat['author'] = TextIndex(
         interface = interface,
         field_name = 'author')
@@ -48,7 +53,7 @@ def filter(extent, uid, obj):
 def createBibliographyCatalog(event):
     """ Create a bibliography catalog when a new quotationtool site is
     created."""
-
+    
     sm = event.object.getSiteManager()
 
     from zc.catalog.extentcatalog import FilterExtent, Catalog
@@ -58,5 +63,10 @@ def createBibliographyCatalog(event):
 
     createBibliographyCatalogIndices(cat)
 
+    cat['any'] = TextIndex(
+        interface = interfaces.IBibliographyCatalog,
+        field_name = 'any')
+
     sm.registerUtility(cat, ICatalog,
                        name = 'bibliography')
+

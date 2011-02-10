@@ -60,6 +60,40 @@
       permission="zope.View"
       />
 
+  <!-- searching -->
+
+  <z3c:pagelet
+      for="..interfaces.IBibliography"
+      name="searchResultPage.html"
+      class=".search.SearchResultPage"
+      permission="zope.View"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <z3c:template
+      for=".search.SearchResultPage"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      template="container.pt"
+      />
+
+  <z3c:pagelet
+      for="..interfaces.IBibliography"
+      name="search.html"
+      class=".search.SearchForm"
+      permission="zope.View"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+
+  <viewlet
+      name="entries"
+      for="*"
+      manager="quotationtool.search.browser.search.SearchTargetManager"
+      class=".search.EntriesSearchTargetViewlet"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="zope.View"
+      weight="20"
+      searchFormURL="bibliography/@@search.html"
+      />
+
   <include file="nav.zcml"/>
   
 </configure>

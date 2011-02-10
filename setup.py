@@ -60,6 +60,9 @@ setup(
         'zope.securitypolicy',
         'zope.app.schema',
         'zope.viewlet',
+        'zope.intid',
+        'zope.app.appsetup',
+        'zope.processlifetime',
 
         'quotationtool.site',
         'quotationtool.security',
@@ -86,6 +89,7 @@ setup(
             'zope.testing',
             'zope.configuration',
             'zope.site',
+            'zope.app.testing',
             ],
         ),
     )

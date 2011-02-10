@@ -5,10 +5,16 @@
   <include file="dependencies.zcml"/>
   
   <include file="permissions.zcml"/>
-  
+
   <!-- Include roles in your app!
   <include file="roles.zcml"/-->
 
+
+  <subscriber
+      handler=".intid.bootStrapSubscriber"
+      for="zope.processlifetime.IDatabaseOpenedWithRoot"
+      />
+  
   <!-- bibliography -->
   
   <interface

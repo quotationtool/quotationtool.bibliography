@@ -10,6 +10,10 @@
     <include package="zope.security"/>
     <include package="zope.annotation"/>
     <include package="zope.dublincore"/>
+    <include package="zope.keyreference"/>
+    <include package="zope.intid"/>
+    <include package="zope.catalog"/>
+    <include package="zc.catalog"/>
     
     <include package="quotationtool.security"/>
     <include package="quotationtool.site"/>

@@ -3,6 +3,7 @@ import zope.component
 from zope.viewlet.manager import ViewletManager
 from z3c.menu.ready2go import ISiteMenu
 from z3c.menu.ready2go.manager import MenuManager
+from z3c.menu.ready2go.item import SiteMenuItem
 
 from quotationtool.skin.interfaces import ISubNavManager
 from quotationtool.skin.browser.nav import MainNavItem
@@ -29,3 +30,6 @@ BibliographySubNav = ViewletManager('bibliographysubnav',
 IBibliographySubNav.implementedBy(BibliographySubNav)
 
 
+class ISearchSubNavItem(zope.interface.Interface): pass
+class SearchSubNavItem(SiteMenuItem):
+    zope.interface.implements(ISearchSubNavItem)
