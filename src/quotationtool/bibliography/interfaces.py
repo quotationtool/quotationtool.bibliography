@@ -13,6 +13,9 @@ from zope.viewlet.interfaces import IViewletManager
 _ = MessageFactory('quotationtool')
 
 
+NAMES_SEPARATOR = u" / "
+
+
 class IEntryKey(zope.interface.Interface):
     pass
 

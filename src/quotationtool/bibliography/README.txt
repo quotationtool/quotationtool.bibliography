@@ -47,12 +47,12 @@ provide an adapter for our MyEntry class:
     ...	    	if name == 'author':
     ...		    rc = u""
     ...             for au in getattr(self.context, 'author', []):
-    ...		        rc += au +u", "
-    ...		    return rc
+    ...		        rc += au + interfaces.NAMES_SEPARATOR
+    ...		    return rc[:-3]
     ...         return getattr(self.context, name, u"")
     >>> zope.component.provideAdapter(MyCatalogAdapter)
     >>> interfaces.IBibliographyCatalog(mybook).author
-    u'Horkheimer, Max, Adorno, Theodor W., '
+    u'Horkheimer, Max / Adorno, Theodor W.'
 
 Now we can use the namechooser:
 

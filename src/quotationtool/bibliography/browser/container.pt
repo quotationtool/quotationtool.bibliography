@@ -1,6 +1,6 @@
-<div class="container_listing bibliography_container">
-  <table>
-    <thead>
+<div class="container-listing bibliography-container">
+  <table >
+    <thead class="head">
       <td>
 	<span
 	    i18n:translate="">

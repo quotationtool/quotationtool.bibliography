@@ -30,7 +30,9 @@ class EntryNameChooser(NameChooser):
         obj = interfaces.IBibliographyCatalog(obj)
         name = u""
         if obj.author:
-            name += removeNonAscii(obj.author.split(',')[0])
+            # get first author, get the part before comma
+            au1 = obj.author.split(interfaces.NAMES_SEPARATOR.strip())[0]
+            name += removeNonAscii(au1.split(',')[0])
         else:
             if obj.title:
                 name += removeNonAscii(obj.title)
