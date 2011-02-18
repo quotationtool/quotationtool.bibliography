@@ -1,0 +1,13 @@
+<div class="bibliography-configuration" i18n:domain="quotationtool">
+  
+  <h1 i18n:translate="">Bibliography Configuration</h1>
+
+  <p i18n:translate="">
+    You should only change the configuration of the bibliography if
+    you really know what you're doing.
+  </p>
+
+  <div class="configuration-items"
+       tal:content="structure provider:bibliography_configuration"/>
+
+</div>

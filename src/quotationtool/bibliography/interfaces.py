@@ -75,6 +75,10 @@ class IBibliographyContainer(IContainer):
     contains('.IEntry')
 
 
+class IConfigurationManager(zope.viewlet.interfaces.IViewletManager):
+    """ A viewlet manager for configuration related things."""
+
+
 class IConfiguration(zope.interface.Interface):
     """ Stores some configuration values. """
     

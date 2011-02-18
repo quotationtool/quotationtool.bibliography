@@ -17,6 +17,11 @@
       />
 
   <grant
+      permission="quotationtool.bibliography.ManageBibliography"
+      role="quotationtool.Editor"
+      />
+
+  <grant
       permission="quotationtool.bibliography.EditEntry"
       role="quotationtool.Creator"
       />

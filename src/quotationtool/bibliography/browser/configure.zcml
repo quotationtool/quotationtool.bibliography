@@ -39,6 +39,14 @@
       permission="zope.View"
       />
 
+  <zope:view
+      name="citation"
+      type="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      for="..interfaces.IEntry"
+      factory=".entry.DefaultView"
+      permission="zope.View"
+      />
+
   <z3c:pagelet
       name="addEntry.html"
       for="..interfaces.IBibliography"
@@ -59,6 +67,30 @@
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
       permission="zope.View"
       />
+
+  <!-- config -->
+
+  <z3c:pagelet
+      for="..interfaces.IBibliography"
+      name="configuration.html"
+      class=".config.ConfigPagelet"
+      permission="quotationtool.bibliography.ManageBibliography"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <z3c:template
+      for=".config.ConfigPagelet"
+      template="config.pt"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+
+  <viewletManager
+      name="bibliography_configuration"
+      class=".config.ConfigManager"
+      provides="..interfaces.IConfigurationManager"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="zope.View"
+      />
+  
 
   <!-- searching -->
 

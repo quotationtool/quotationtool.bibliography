@@ -12,4 +12,9 @@
       title="[edit-entry-permission-title] Edit a bibliographic entry"
       />
       
+  <permission
+      id="quotationtool.bibliography.ManageBibliography"
+      title="[manage-bibliography-permission-title] Manage the bibliography configuration"
+      />
+      
 </configure>

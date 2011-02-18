@@ -92,4 +92,17 @@
       factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
       />
 
+  <z3c:siteMenuItem
+      for="*"
+      title="[subnav-bibliography-configuration] Config"
+      name="bibliography-configuration"
+      permission="quotationtool.bibliography.ManageBibliography"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      manager=".nav.IBibliographySubNav"
+      viewName="bibliography/@@configuration.html"
+      weight="500"
+      />
+
+
+
 </configure>
