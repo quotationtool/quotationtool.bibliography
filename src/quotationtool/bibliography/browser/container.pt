@@ -1,15 +1,16 @@
-<div class="container-listing bibliography-container">
+<div class="container-listing bibliography-container" 
+     i18n:domain="quotationtool">
   <table >
     <thead class="head">
       <td>
 	<span
-	    i18n:translate="">
+	    i18n:translate="bibliography-container-title-col">
 	  Title
 	</span>
       </td>
       <td>
 	<span
-	    i18n:translate="">
+	    i18n:translate="bibliography-container-flags-col">
 	  flags
 	</span>
       </td>

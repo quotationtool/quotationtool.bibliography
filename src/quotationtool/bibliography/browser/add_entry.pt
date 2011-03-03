@@ -1,6 +1,6 @@
-<div id="add-bibliographic-entry">
+<div id="add-bibliographic-entry" i18n:domain="quotationtool">
   
-  <h1>Add bibliographic entry</h1>
+  <h1 i18n:translate="bibliography-add-entry-head">Add bibliographic entry</h1>
 
   <div class="options" tal:content="structure provider:add-bibliographic-entry"/>
 
