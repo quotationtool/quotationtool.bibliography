@@ -43,13 +43,41 @@
   </class>
 
   <subscriber handler=".bibliography.createBibliography"/>
-  <subscriber handler=".indexing.createBibliographyCatalog"/>
+  <subscriber handler=".indexer.createBibliographyIndicesSubscriber"/>
+  <subscriber handler=".indexing.createBibliographyIndicesSubscriber"/>
 
   <adapter
       factory=".namechooser.EntryNameChooser"
       for=".interfaces.IBibliography"
       provides="zope.container.interfaces.INameChooser"
       />
+
+  <adapter
+      factory=".indexer.TypeValueIndexer"
+      name="type-field"
+      />
+
+  <adapter
+      for=".searcher.IBibliographySearchFilter"
+      factory="quotationtool.search.searcher.any_factory"
+      name="any-fulltext"
+      />
+  <adapter
+      for=".searcher.IBibliographySearchFilter"
+      factory="quotationtool.search.searcher.type_factory"
+      name="type-field"
+      />
+  <adapter
+      for=".searcher.IBibliographySearchFilter"
+      factory=".searcher.author_factory"
+      name="author-fulltext"
+      />
+  <adapter
+      for=".searcher.IBibliographySearchFilter"
+      factory=".searcher.title_factory"
+      name="title-fulltext"
+      />
+
 
   <include package=".browser"/>
 

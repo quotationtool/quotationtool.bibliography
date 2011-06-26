@@ -63,6 +63,7 @@ setup(
         'zope.intid',
         'zope.app.appsetup',
         'zope.processlifetime',
+        'z3c.indexer',
 
         'quotationtool.site',
         'quotationtool.security',
@@ -80,6 +81,8 @@ setup(
         'z3c.form',
         'zc.resourcelibrary',
         'z3c.menu.ready2go',
+        'z3c.table',
+        'z3c.searcher',
 
         'zope.app.pagetemplate',
         'zope.app.component',

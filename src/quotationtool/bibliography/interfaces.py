@@ -109,6 +109,18 @@ class IConfiguration(zope.interface.Interface):
         )
 
 
+class IAddEntryManager(IViewletManager):
+    """ A viewlet manager that lets the user choose an entry type he
+    wants to add.""" 
+
+
+class IEntryValue(zope.interface.Interface):
+    """ Get an value of a bibliographic entry for use in bibliography
+    table. This should be implemented per named adapters."""
+
+    value = zope.interface.Attribute("""The value of the entry.""")
+
+
 class IBibliographyCatalog(zope.interface.Interface):
     """A catalog of indexes that we want to search for in the
     bibliography."""
@@ -199,8 +211,3 @@ class IBibliographyCatalog(zope.interface.Interface):
         required = False,
         default = u'',
         )
-
-
-class IAddEntryManager(IViewletManager):
-    """ A viewlet manager that lets the user choose an entry type he
-    wants to add.""" 

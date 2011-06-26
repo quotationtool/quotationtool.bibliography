@@ -1,0 +1,65 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="quotationtool">
+
+  <z3c:pagelet
+      for="..interfaces.IBibliography"
+      name="table.html"
+      class=".table.BibliographyTable"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="zope.View"
+      />
+  <z3c:template
+      for=".table.BibliographyTable"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      template="table.pt"
+      />
+
+  <adapter
+      for="..interfaces.IBibliography
+	   quotationtool.skin.interfaces.IQuotationtoolBrowserLayer
+	   .table.IBibliographyTable
+	   .table.ISortingColumn"
+      provides="z3c.table.interfaces.IColumnHeader"
+      factory="quotationtool.skin.browser.table.SortingColumnHeader"
+      />
+
+  <adapter
+      name="author"
+      for="..interfaces.IBibliography
+	   quotationtool.skin.interfaces.IQuotationtoolBrowserLayer
+	   .table.IBibliographyTable"
+      provides="z3c.table.interfaces.IColumn"
+      factory=".table.AuthorColumn"
+      />
+
+  <adapter
+      name="title"
+      for="..interfaces.IBibliography
+	   quotationtool.skin.interfaces.IQuotationtoolBrowserLayer
+	   .table.IBibliographyTable"
+      provides="z3c.table.interfaces.IColumn"
+      factory=".table.TitleColumn"
+      />
+
+  <adapter
+      name="year"
+      for="..interfaces.IBibliography
+	   quotationtool.skin.interfaces.IQuotationtoolBrowserLayer
+	   .table.IBibliographyTable"
+      provides="z3c.table.interfaces.IColumn"
+      factory=".table.YearColumn"
+      />
+
+  <adapter
+      name="flags"
+      for="..interfaces.IBibliography
+	   quotationtool.skin.interfaces.IQuotationtoolBrowserLayer
+	   .table.IBibliographyTable"
+      provides="z3c.table.interfaces.IColumn"
+      factory=".table.FlagsColumn"
+      />
+
+</configure>

@@ -37,7 +37,15 @@
       provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
       factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
       />
-
+  <adapter
+      for="..interfaces.IBibliography
+           zope.publisher.interfaces.browser.IBrowserRequest
+           quotationtool.search.interfaces.ISearchResultPage
+	   quotationtool.skin.interfaces.IMainNav
+	   .nav.IBibliographyMainNavItem"
+      provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
+      factory="z3c.menu.ready2go.checker.FalseSelectedChecker"
+      />
 
 
   <!-- bibliography subnav-->
@@ -53,43 +61,35 @@
 
   <z3c:siteMenuItem
       for="*"
+      title="[subnav-bibliography-formatted] Formatted"
+      name="bibliography-formatted"
+      permission="zope.View"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      manager=".nav.IBibliographySubNav"
+      viewName="bibliography/@@index.html"
+      weight="100"
+      />
+
+  <z3c:siteMenuItem
+      for="*"
+      title="[subnav-bibliography-table] Tabular"
+      name="bibliography-table"
+      permission="zope.View"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      manager=".nav.IBibliographySubNav"
+      viewName="bibliography/@@table.html"
+      weight="110"
+      />
+
+  <z3c:siteMenuItem
+      for="*"
       title="[subnav-bibliography-add] Add Entry"
       name="add-bibliographicentry"
       permission="zope.View"
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
       manager=".nav.IBibliographySubNav"
       viewName="bibliography/@@addEntry.html"
-      weight="100"
-      />
-
-  <z3c:siteMenuItem
-      for="*"
-      title="[subnav-bibliography-search] Search"
-      name="search-bibliography"
-      class=".nav.SearchSubNavItem"
-      permission="zope.View"
-      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
-      manager=".nav.IBibliographySubNav"
-      viewName="bibliography/@@search.html"
-      weight="200"
-      />
-  <adapter
-      for="..interfaces.IBibliography
-           zope.publisher.interfaces.browser.IBrowserRequest
-           .search.SearchForm
-           z3c.menu.ready2go.interfaces.IMenuManager
-           .nav.ISearchSubNavItem"
-      provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
-      factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
-      />
-  <adapter
-      for="..interfaces.IBibliography
-           zope.publisher.interfaces.browser.IBrowserRequest
-           .search.SearchResultPage
-           z3c.menu.ready2go.interfaces.IMenuManager
-           .nav.ISearchSubNavItem"
-      provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
-      factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
+      weight="120"
       />
 
   <z3c:siteMenuItem
