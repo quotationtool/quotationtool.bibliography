@@ -27,6 +27,15 @@ class BibliographyTable(table.Table, BrowserPagelet):
     cssClassOdd = u"odd"
 
 
+class IdColumn(column.LinkColumn):
+    """ The id (__name__ attribute) of the bibliography table."""
+
+    header = _('bibliography-columnheader-id',
+               u"ID")
+
+    weight = 10
+
+
 class ISortingColumn(IColumn):
     """ A column that provides sorting table rows."""
 
@@ -41,8 +50,8 @@ class AuthorColumn(column.Column):
     weight = 100
     
     def renderCell(self, item):
-        getter = zope.component.getAdapter(item, IEntryValue, name='author')
-        return getter.value
+        return zope.component.getMultiAdapter(
+            (item, self.request), name='author')()
 
 
 class TitleColumn(column.Column):
@@ -55,11 +64,11 @@ class TitleColumn(column.Column):
     weight = 200
     
     def renderCell(self, item):
-        getter = zope.component.getAdapter(item, IEntryValue, name='title')
-        return getter.value
+        return zope.component.getMultiAdapter(
+            (item, self.request), name='title')()
 
 
-class YearColumn(column.Column):
+class YearColumn(column.LinkColumn):
     """ The year column of the bibliography table."""
 
     zope.interface.implements(ISortingColumn)
@@ -69,8 +78,8 @@ class YearColumn(column.Column):
     weight = 300
     
     def renderCell(self, item):
-        getter = zope.component.getAdapter(item, IEntryValue, name='year')
-        return getter.value
+        return zope.component.getMultiAdapter(
+            (item, self.request), name='year')()
 
 
 class FlagsColumn(column.Column):

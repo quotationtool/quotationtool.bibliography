@@ -70,7 +70,7 @@
       weight="100"
       />
 
-  <!--z3c:siteMenuItem
+  <z3c:siteMenuItem
       for="*"
       title="[subnav-bibliography-table] Tabular"
       name="bibliography-table"
@@ -79,7 +79,7 @@
       manager=".nav.IBibliographySubNav"
       viewName="bibliography/@@table.html"
       weight="110"
-      /-->
+      />
 
   <z3c:siteMenuItem
       for="*"

@@ -27,6 +27,15 @@
       />
 
   <adapter
+      name="id"
+      for="..interfaces.IBibliography
+	   quotationtool.skin.interfaces.IQuotationtoolBrowserLayer
+	   .table.IBibliographyTable"
+      provides="z3c.table.interfaces.IColumn"
+      factory=".table.IdColumn"
+      />
+
+  <adapter
       name="author"
       for="..interfaces.IBibliography
 	   quotationtool.skin.interfaces.IQuotationtoolBrowserLayer
