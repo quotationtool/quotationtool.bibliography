@@ -1,23 +1,25 @@
 import zope.interface
-from z3c.searcher.interfaces import ISearchFilter
+import zope.component
+from z3c.searcher.interfaces import ISearchFilter, CONNECTOR_OR
 from z3c.searcher.criterium import TextCriterium, SearchCriterium
 from z3c.searcher.criterium import factory
 from z3c.searcher.filter import EmptyTerm, SearchFilter
+from zope.traversing.browser import absoluteURL
 
-from quotationtool.search.interfaces import ITypeExtent
+from quotationtool.search.interfaces import IQuotationtoolSearchFilter
+from quotationtool.search.interfaces import ITypeExtent, ICriteriaChainSpecifier, IResultSpecifier
 
-from quotationtool.bibliography.interfaces import _
-
-
-class IBibliographySearchFilter(ISearchFilter):
-    """ Search filter for bibliographic entries."""
+from quotationtool.bibliography.interfaces import _, IBibliography, IBibliographySearchFilter
 
 
 class BibliographySearchFilter(SearchFilter):
     """ Bibliography search filter."""
 
-    zope.interface.implements(IBibliographySearchFilter,
-                              ITypeExtent)
+    zope.interface.implements(IQuotationtoolSearchFilter,
+                              IBibliographySearchFilter,
+                              ITypeExtent,
+                              ICriteriaChainSpecifier,
+                              IResultSpecifier)
 
     def getDefaultQuery(self):
         return EmptyTerm()
@@ -28,6 +30,25 @@ class BibliographySearchFilter(SearchFilter):
         crit.value = u'quotationtool.bibliography.interfaces.IEntry'
         crit.connectorName = 'AND'
         self.addCriterium(crit)
+
+    first_criterium_connector_name = CONNECTOR_OR # see ICriteriaChainSpecifier
+
+    ignore_empty_criteria = True # see ICriteriaChainSpecifier
+
+    def resultURL(self, context, request):
+        """ See IResultSpecifier"""
+        bibliography = zope.component.getUtility(
+            IBibliography, context=context)
+        return absoluteURL(bibliography, request) + u"/@@searchResult.html"
+
+    session_name = 'bibliography' # see IResultSpecifier
+
+
+bibliography_search_filter_factory = zope.component.factory.Factory(
+    BibliographySearchFilter,
+    _('BibliographyFilter-title', u"Bibliographic entries"),
+    _('BibliographySearchFilter-desc', u"Search for entries in the bibliography.")
+    )
 
 
 class AuthorCriterium(TextCriterium):

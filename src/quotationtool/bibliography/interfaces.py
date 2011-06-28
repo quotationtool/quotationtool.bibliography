@@ -8,6 +8,7 @@ from zope.container.constraints import contains, containers
 from zope.interface.common.interfaces import IException
 from zope.i18nmessageid import MessageFactory
 from zope.viewlet.interfaces import IViewletManager
+from z3c.searcher.interfaces import ISearchFilter
 
 
 _ = MessageFactory('quotationtool')
@@ -121,6 +122,12 @@ class IEntryValue(zope.interface.Interface):
     value = zope.interface.Attribute("""The value of the entry.""")
 
 
+class IBibliographySearchFilter(ISearchFilter):
+    """ Search filter for bibliographic entries."""
+
+
+
+# BBB
 class IBibliographyCatalog(zope.interface.Interface):
     """A catalog of indexes that we want to search for in the
     bibliography."""

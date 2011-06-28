@@ -57,8 +57,13 @@
       name="type-field"
       />
 
+  <utility
+      component=".searcher.bibliography_search_filter_factory"
+      name="quotationtool.bibliography.searcher.BibliographySearchFilter"
+      />
+
   <adapter
-      for=".searcher.IBibliographySearchFilter"
+      for=".interfaces.IBibliographySearchFilter"
       factory="quotationtool.search.searcher.any_factory"
       name="any-fulltext"
       />

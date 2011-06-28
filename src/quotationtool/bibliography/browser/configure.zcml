@@ -115,15 +115,6 @@
       template="formattedresult.pt"
       />
 
-  <zope:adapter
-      name="quotationtool.bibliography.interfaces.IBibliography"
-      provides="quotationtool.search.interfaces.ISearchFilterProvider"
-      for="*
-	   zope.publisher.interfaces.browser.IBrowserRequest
-	   *"
-      factory=".search.BibliographySearchFilterProvider"
-      />
-
   <include file="nav.zcml"/>
   
 </configure>

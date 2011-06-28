@@ -1,5 +1,5 @@
 import zope.component
-from z3c.indexer.index import FieldIndex, TextIndex
+from z3c.indexer.index import FieldIndex, TextIndex, ValueIndex
 from z3c.indexer.interfaces import IIndex
 from z3c.indexer.indexer import ValueIndexer
 
@@ -17,6 +17,17 @@ class TypeValueIndexer(ValueIndexer):
 
     value = u'quotationtool.bibliography.interfaces.IEntry'
 
+
+class IdValueIndexer(ValueIndexer):
+    """ Indexer for the 'id-field' index."""
+    
+    zope.component.adapts(IEntry)
+
+    indexName = 'id-field'
+    
+    @property
+    def value(self):
+        return self.context.__name__
 
 
 def createBibliographyIndices(site):
@@ -38,6 +49,9 @@ def createBibliographyIndices(site):
 
     year_field = default['year-field'] = FieldIndex()
     sm.registerUtility(year_field, IIndex, name='year-field')
+
+    year_value = default['year-value'] = ValueIndex()
+    sm.registerUtility(year_value, IIndex, name='year-value')
 
     if not default.has_key('any-fulltext'):
         any_fulltext = default['any-fulltext'] = TextIndex()
