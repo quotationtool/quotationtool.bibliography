@@ -1,5 +1,5 @@
 import zope.component
-from z3c.indexer.index import FieldIndex, TextIndex, ValueIndex
+from z3c.indexer.index import FieldIndex, TextIndex, ValueIndex, SetIndex
 from z3c.indexer.interfaces import IIndex
 from z3c.indexer.indexer import ValueIndexer
 
@@ -31,6 +31,8 @@ class IdValueIndexer(ValueIndexer):
 
 
 def createBibliographyIndices(site):
+    """ Create indexes on the default site management container and
+    register them as named utilities."""
 
     sm = site.getSiteManager()
     default = sm['default']
@@ -47,11 +49,11 @@ def createBibliographyIndices(site):
     title_fulltext = default['title-fulltext'] = TextIndex()
     sm.registerUtility(title_fulltext, IIndex, name='title-fulltext')
 
-    year_field = default['year-field'] = FieldIndex()
-    sm.registerUtility(year_field, IIndex, name='year-field')
+    year_set = default['year-set'] = SetIndex()
+    sm.registerUtility(year_set, IIndex, name='year-set')
 
-    year_value = default['year-value'] = ValueIndex()
-    sm.registerUtility(year_value, IIndex, name='year-value')
+    origyear_set = default['origyear-set'] = SetIndex()
+    sm.registerUtility(origyear_set, IIndex, name='origyear-set')
 
     if not default.has_key('any-fulltext'):
         any_fulltext = default['any-fulltext'] = TextIndex()

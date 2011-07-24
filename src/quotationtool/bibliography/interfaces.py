@@ -48,6 +48,25 @@ class EntryKey(zope.schema.TextLine):
         return re.compile("^([a-zA-z0-9]|-|_|:)+$").match(value)
 
 
+class IEntryKeyChooser(zope.interface.Interface):
+    """ The bibliography's namechooser will try to get the key from
+    the entry that is to be named by adapting it to this interface:
+    IEntryKeyChooser(entry).chooseKey()
+
+    Each class of entry types must be adaptable to an adapter
+    implementing IEntryKeyChooser."""
+
+    def chooseKey():
+        """ Returns an ascii entry key. Note: This is not yet the
+        unique name, since it may need some variation (e.g. by
+        alphanumeric suffix) to be unique.
+
+        Example: This may return 'Kant1790'. But there may be an entry
+        named 'Kant1790' in the bibliography already. So the
+        bibliographies nameschooser would have to append an suffix and
+        choose 'Kant1790a' as the unique name."""
+
+
 class IEntry(IContained):
     """ An entry in the bibliography. This is a base interface and all
     more specific entry types should be derived from this.
@@ -115,16 +134,17 @@ class IAddEntryManager(IViewletManager):
     wants to add.""" 
 
 
+class IBibliographySearchFilter(ISearchFilter):
+    """ Search filter for bibliographic entries."""
+
+
+
+# BBB
 class IEntryValue(zope.interface.Interface):
     """ Get an value of a bibliographic entry for use in bibliography
     table. This should be implemented per named adapters."""
 
     value = zope.interface.Attribute("""The value of the entry.""")
-
-
-class IBibliographySearchFilter(ISearchFilter):
-    """ Search filter for bibliographic entries."""
-
 
 
 # BBB

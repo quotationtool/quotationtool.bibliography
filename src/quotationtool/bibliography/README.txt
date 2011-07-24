@@ -29,30 +29,30 @@ We want to choose names for an entry. So we need an entry type.
 
     >>> names.chooseName(None, mybook)
     Traceback (most recent call last):
-    TypeError: ('Could not adapt', <MyEntry object at 0x...>, <InterfaceClass quotationtool.bibliography.interfaces.IBibliographyCatalog>)
+    TypeError: ('Could not adapt', <MyEntry object at 0x...>, <InterfaceClass quotationtool.bibliography.interfaces.IEntryKeyChooser>)
 
-The name chooser adapts the entry to the IBibliographyCatalog
-interface where author, title and year fields are given. So we have to
-provide an adapter for our MyEntry class:
+The name chooser adapts the entry to the IEntryKeyChooser interface
+which defines a method called chooseKey(). So we have to provide an
+adapter for our MyEntry class:
 
     >>> from quotationtool.bibliography import interfaces
-    >>> class MyCatalogAdapter(object):
-    ...     zope.interface.implements(interfaces.IBibliographyCatalog)
+    >>> class MyEntryKeyChooser(object):
+    ...     zope.interface.implements(interfaces.IEntryKeyChooser)
     ...     zope.component.adapts(IMyEntry)
     ...     def __init__(self, context):
     ...         self.context = context
-    ...     def getter(self, attr):
-    ...         return getattr(self.context, attr, u"")
-    ...     def __getattr__(self, name):
-    ...	    	if name == 'author':
-    ...		    rc = u""
-    ...             for au in getattr(self.context, 'author', []):
-    ...		        rc += au + interfaces.NAMES_SEPARATOR
-    ...		    return rc[:-3]
-    ...         return getattr(self.context, name, u"")
-    >>> zope.component.provideAdapter(MyCatalogAdapter)
-    >>> interfaces.IBibliographyCatalog(mybook).author
-    u'Horkheimer, Max / Adorno, Theodor W.'
+    ...	    def chooseKey(self):
+    ...         rc = u""
+    ...     	if self.context.author:
+    ...		    rc += self.context.author[0].split(',')[0].strip()
+    ...         if not rc and self.context.title:
+    ...             rc += self.context.title
+    ...         if self.context.year:
+    ...             rc += str(self.context.year)
+    ...         return rc
+    >>> zope.component.provideAdapter(MyEntryKeyChooser)
+    >>> interfaces.IEntryKeyChooser(mybook).chooseKey()
+    u'Horkheimer1944'
 
 Now we can use the namechooser:
 
@@ -60,7 +60,7 @@ Now we can use the namechooser:
     u'Horkheimer1944'
 
     >>> biblio[names.chooseName(None, mybook)] = mybook
-    >>> mybook.__name__
+    >>> #mybook.__name__
     u'Horkheimer1944'
 
     >>> names.chooseName(None, mybook)
@@ -70,71 +70,23 @@ Now we can use the namechooser:
     >>> names.chooseName(None, mybook2)
     u'vonderGruen1976'
 
+As we can see, the name chooser removes whitespace from the name. All
+non-ascii characters will be removed, too.
 
     >>> otherbook = MyEntry(title = u'Historisches W\\"{o}rterbuch der Philosophie', year = 1971)
     >>> names.chooseName(None, otherbook)
     u'HistorischesWorterbuchderPhilosophie1971'
 
 
-We can also suggest a name:
+We can also suggest a name. If the suggested name is already in use, the namechooser will automatically append an alphabetical suffix to make it unique:
 
     >>> names.chooseName(u'Horkheimer1944', mybook)
     u'Horkheimer1944a'
 
-Suggesting a name may be stupid, but the name chooser answers:
+Suggesting a name overrides the key determined be the IEntryKeyChooser
+adapter:
 
     >>> names.chooseName(u'Horkheimer1944', mybook2)
     u'Horkheimer1944a'
 
 
-Indexing
---------
-
-In order to get the values out of an entry object we make use of
-adapters. We use the same adapter as above, which is still registered.
-
-Create the catalog:
-
-    >>> from quotationtool.bibliography.indexing import createBibliographyCatalogIndices, filter
-    >>> from zc.catalog.extentcatalog import FilterExtent, Catalog
-    >>> extent = FilterExtent(filter)
-    >>> cat = Catalog(extent)
-    >>> createBibliographyCatalogIndices(cat)
-    >>> list(cat.keys())
-    [u'ante', u'author', u'language', u'post', u'title', u'year']
-
-    >>> cat.index_doc(1, mybook)
-    >>> assert(len(extent) == 1)
-    Traceback (most recent call last):
-    ...
-    AssertionError
-
-The filter is passed by objects that implement interfaces.IEntry
-only. So if we want to get our MyBook objects indexed we have to
-provide this interface.
-
-    >>> from zope.interface import classImplements
-    >>> classImplements(MyEntry, interfaces.IEntry)
-    >>> cat.index_doc(1, mybook)
-    >>> assert(len(extent) == 1)
-
-Now we can search the indices:
-
-    >>> list(cat.apply({'author': u"mendelssohn"}))
-    []
-
-    >>> list(cat.apply({'author': u"horkheimer"}))
-    [1]
-
-    >>> list(cat.apply({'author': u"adorno"}))
-    [1]
-
-    >>> list(cat.apply({'title': u"dialektik"}))
-    [1]
-
-    >>> cat.index_doc(2, mybook2)
-    >>> list(cat.apply({'author': u"gruen"}))
-    [2]
-
-    >>> list(cat.apply({'author': u"max"}))
-    [1, 2]

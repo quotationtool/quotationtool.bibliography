@@ -44,7 +44,6 @@
 
   <subscriber handler=".bibliography.createBibliography"/>
   <subscriber handler=".indexer.createBibliographyIndicesSubscriber"/>
-  <subscriber handler=".indexing.createBibliographyIndicesSubscriber"/>
 
   <adapter
       factory=".namechooser.EntryNameChooser"
@@ -55,6 +54,10 @@
   <adapter
       factory=".indexer.TypeValueIndexer"
       name="type-field"
+      />
+  <adapter
+      factory=".indexer.IdValueIndexer"
+      name="id-field"
       />
 
   <utility

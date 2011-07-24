@@ -11,8 +11,7 @@ def bootStrapSubscriber(event):
     """ Subscriber to the IDatabaseOpenedWithRoot event. Create a global
     intid utility if there is not yet one.
 
-    The intid utility is needed for indexing entries in the
-    bibliography catalog."""
+    The intid utility is needed for indexing entries."""
 
     db, connection, root, root_folder = getInformationFromEvent(event)
     

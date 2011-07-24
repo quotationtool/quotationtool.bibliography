@@ -27,7 +27,7 @@ setup(
         '********\n'
         ),
     keywords='quotationtool',
-    author=u"Christian Lueck",
+    author=u"Christian Lu&uuml;ck",
     author_email='cluecksbox@googlemail.com',
     url='',
     license='ZPL 2.1',
@@ -51,8 +51,6 @@ setup(
         'zope.container',
         'zope.exceptions',
         'zope.i18nmessageid',
-        'zope.catalog',
-        'zc.catalog >= 1.5',
         'zope.app.content',
         'zope.annotation',
         'zope.dublincore',
@@ -64,6 +62,7 @@ setup(
         'zope.app.appsetup',
         'zope.processlifetime',
         'z3c.indexer',
+        'z3c.searcher',
 
         'quotationtool.site',
         'quotationtool.security',
@@ -82,7 +81,6 @@ setup(
         'zc.resourcelibrary',
         'z3c.menu.ready2go',
         'z3c.table',
-        'z3c.searcher',
 
         'zope.app.pagetemplate',
         'zope.app.component',

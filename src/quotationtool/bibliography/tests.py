@@ -24,7 +24,7 @@ def setUpZCML(test):
     
 def setUpSome(test):
     """ There are subscribers that need intid in the dependencies
-    (zope.catalog)"""
+    (zope.index, z3c.indexer)"""
     import zope
     # some dependencies
     XMLConfig('meta.zcml', zope.component)()
@@ -43,7 +43,7 @@ def setUpSome(test):
         quotationtool.bibliography.bibliography.createBibliography,
         adapts=[INewQuotationtoolSiteEvent])
     zope.component.provideHandler(
-        quotationtool.bibliography.indexing.createBibliographyCatalog,
+        quotationtool.bibliography.indexer.createBibliographyIndicesSubscriber,
         adapts=[INewQuotationtoolSiteEvent])
     # bibliography object annotation
     from zope.annotation.interfaces import IAttributeAnnotatable
@@ -73,16 +73,15 @@ class SiteCreationTests(PlacelessSetup, unittest.TestCase):
             IBibliography, context = site, default = None)
         self.assertTrue(ut == site['bibliography'])
 
-    def test_CatalogIndexCreation(self):
+    def test_IndexCreation(self):
         from quotationtool.site.site import QuotationtoolSite
-        from quotationtool.bibliography.interfaces import IBibliographyCatalog
         self.root_folder['quotationtool'] = site = QuotationtoolSite()
-        from zope.catalog.interfaces import ICatalog
-        ut = zope.component.queryUtility(
-            ICatalog, name = 'bibliography', 
-            context = site, default = None)
-        from zc.catalog.extentcatalog import Catalog
-        self.assertTrue(isinstance(ut, Catalog))
+        from z3c.indexer.interfaces import IIndex
+        for name in ('author-field', 'author-fulltext', 'title-field', 'title-fulltext', 'year-set', 'origyear-set', 'any-fulltext'): 
+            idx = zope.component.queryUtility(
+                IIndex, name=name, 
+                context=site, default=None)
+            self.assertTrue(idx is not None)
 
 def test_suite():
     return unittest.TestSuite((

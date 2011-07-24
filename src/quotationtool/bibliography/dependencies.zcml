@@ -12,8 +12,6 @@
     <include package="zope.dublincore"/>
     <include package="zope.keyreference"/>
     <include package="zope.intid"/>
-    <include package="zope.catalog"/>
-    <include package="zc.catalog"/>
     <include package="z3c.indexer" file="subscriber.zcml"/>
     
     <include package="quotationtool.security"/>

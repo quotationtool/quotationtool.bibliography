@@ -5,7 +5,7 @@ from z3c.table.interfaces import ITable, IColumn
 from zope.contentprovider.interfaces import IContentProvider
 from z3c.pagelet.browser import BrowserPagelet
 
-from quotationtool.bibliography.interfaces import _, IEntryValue
+from quotationtool.bibliography.interfaces import _
 
 
 class IBibliographyTable(ITable):
