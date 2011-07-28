@@ -68,7 +68,7 @@ class TitleColumn(column.Column):
             (item, self.request), name='title')()
 
 
-class YearColumn(column.LinkColumn):
+class YearColumn(column.Column):
     """ The year column of the bibliography table."""
 
     zope.interface.implements(ISortingColumn)
