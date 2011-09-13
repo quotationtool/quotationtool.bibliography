@@ -2,6 +2,21 @@
     xmlns="http://namespaces.zope.org/zope">
 
   <grant
+      permission="quotationtool.bibliography.Read"
+      role="quotationtool.Visitor"
+      />
+
+  <grant
+      permission="quotationtool.bibliography.Read"
+      role="quotationtool.Member"
+      />
+
+  <grant
+      permission="quotationtool.bibliography.Read"
+      role="quotationtool.Editor"
+      />
+
+  <grant
       permission="quotationtool.bibliography.AddEntry"
       role="quotationtool.Member"
       />

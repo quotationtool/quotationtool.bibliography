@@ -9,7 +9,7 @@
       name="table.html"
       class=".table.BibliographyTable"
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
-      permission="zope.View"
+      permission="quotationtool.bibliography.Read"
       />
   <z3c:template
       for=".table.BibliographyTable"

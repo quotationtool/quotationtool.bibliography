@@ -18,7 +18,7 @@
       name="index.html"
       for="..interfaces.IBibliography"
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
-      permission="zope.View"
+      permission="quotationtool.bibliography.Read"
       class=".bibliography.Container"
       />
   <z3c:template
@@ -106,7 +106,7 @@
       for="..interfaces.IBibliography"
       name="searchResult.html"
       class=".search.SearchResultPage"
-      permission="zope.View"
+      permission="quotationtool.bibliography.Read"
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
       />
   <z3c:template
