@@ -17,6 +17,11 @@
       />
 
   <grant
+      permission="quotationtool.bibliography.Read"
+      role="quotationtool.Manager"
+      />
+
+  <grant
       permission="quotationtool.bibliography.AddEntry"
       role="quotationtool.Member"
       />
@@ -33,7 +38,7 @@
 
   <grant
       permission="quotationtool.bibliography.ManageBibliography"
-      role="quotationtool.Editor"
+      role="quotationtool.Manager"
       />
 
   <grant
